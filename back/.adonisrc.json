@@ -3,8 +3,7 @@
   "commands": [
     "./commands",
     "@adonisjs/core/build/commands/index.js",
-    "@adonisjs/repl/build/commands",
-    "@zakodium/adonis-mongodb/lib/commands"
+    "@adonisjs/repl/build/commands"
   ],
   "exceptionHandlerNamespace": "App/Exceptions/Handler",
   "aliases": {
@@ -19,8 +18,7 @@
   ],
   "providers": [
     "./providers/AppProvider",
-    "@adonisjs/core",
-    "@zakodium/adonis-mongodb"
+    "@adonisjs/core"
   ],
   "aceProviders": [
     "@adonisjs/repl"

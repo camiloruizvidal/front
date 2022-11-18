@@ -8,6 +8,7 @@ export interface IPageResponse<T> {
 }
 
 export interface IContent {
+  _id?:    string;
   title:   string;
   content: string;
   type:    string;

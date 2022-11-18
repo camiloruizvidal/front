@@ -1,41 +1,34 @@
 import { IPageResponse, IContent } from './../../interface/index';
+import dataFake from './dataFake.json'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class NewsController {
-  public async index({ request }: HttpContextContract) {
+  public async index({ request, response }: HttpContextContract) {
 
-    const page = request.input('page2');
-    let data: IContent[] = [];
+    const page:number = Number(request.input('pages'));
+    let data: IContent[] = dataFake;
 
-    for (let i = 0; i < 10; i++) {
-
-      data.push({
-        title: 'title' + (i + 1),
-        content: 'content' + (i + 1) + 'of page ' + page,
-        type: 'type' + (i + 1),
-        tags: ['tags1', 'tags2', 'tags3', 'tags4', 'tags5', 'tags6'],
-      });
-
-    }
-
-    const response: IPageResponse<IContent> = {
+    const value: IPageResponse<IContent> = {
       data: data,
-      currentPage: 2,
+      currentPage: page,
       totalPages: 100,
       rowsPerPage: 10,
       totalRows: 1000
     }
 
-    return response;
+    response.json(value);
   }
 
-  public async create({ }: HttpContextContract) { }
+  public async create({ response }: HttpContextContract) {
+    response.json({ save: true, id: '-1' })
+  }
 
   public async store({ }: HttpContextContract) { }
 
-  public async show({ }: HttpContextContract) { }
-
-  public async edit({ }: HttpContextContract) { }
+  public async show({params, response}: HttpContextContract) {
+    const value: IContent = dataFake.find((data:IContent) => data._id == params.id)
+    response.json( value )
+  }
 
   public async update({ }: HttpContextContract) { }
 
